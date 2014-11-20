@@ -1,70 +1,71 @@
 #!/usr/bin/env python
 __author__ = "William Ezekiel & Paul Council"
-
 __date__ = "19 November 2014"
-
-__version__ = "0.1"
+__version__ = "1.0"
 
 #imports
 import rpyc
 
 """ An RPS game Player"""
-class RPSPlayer():
+class RPSPlayer(Player)
 
-    def __init__(self,host,port):
-        """ Connect to the framework where the tournament
-        is being hosted
-        :param host name/ip address of machine with framework
-        :param port the port number of the service on the
-            machine with the framework
-        """
-        #self.connection = connectFramework(host,port)
+    # initializes RPSPlayer
+    def __init__(self,name):
+        self.name = name
+        pass
+
+    # play a round of RPS
+    # Use past_moves to make a smart decision.
+    def play(self,past_moves):
+        all_moves = []
+        opponent = None #later implement code to get opponent.
+        while(True):
+            move = strategy(all_moves)
+            # add your move to 
+            all_moves.append[move]
+            opponent_move = 0
+            #add their move
+            all_moves.append[opponent_move]
+                    
+    # Returns 0 for rock, 1 for paper and 2 for scissors
+    # past moves is a [blank] of you and your current opponent's
+    # previous moves in the current game.
+    def strategy(self,past_moves):
+        # first move "scissors" (2)
+        if len(past_moves) == 0:
+            return 2	
+        else:  # predict the next move and counter it
+            opp_moves = []
+            for i in range(0,len(past_moves),2):
+                opp_moves.append(past_moves[i])
+            counter_play = counter(predict(opp_moves))
+            print(counter_play)
+            return counter(predict(opp_moves))
         
-    def connectFramework(self,host,port):
-        """ Connect to the framework where the tournament
-        is being hosted
-        :param host name/ip address of machine with framework
-        :param port the port number of the service on the
-            machine with the framework
-        :return an rpyc connection
-        """
-        return rpyc.connect(host,port)
+    # Find the count of your opponents
+    # previous moves and return the most likely move.
+    def predict(self,opp_moves):
+        play_count = []
+        play_count.append(opp_moves.count(0)) #rock
+        play_count.append(opp_moves.count(1)) #paper
+        play_count.append(opp_moves.count(2)) #scissors
+        return play_count.index(max(play_count))	#return most likely move. Will need to change later if moves are not numbers.
 
-    def play(self,earlierPlays):
-        """ Make a move based on opponents previous moves if applicable
-            :param earlierPlays the previous moves of your opponent.
-            :return a move (currently represented as a string)
-        """
-        #if no play has been made previously
-        if earlierPlays == []:
-            return "scissors"   #for now a string, will be represented properly when we know the full functionality of the framework.
-        elif earlierPlays[-1] == earlierPlays[-2]:
-            #if previous two moves were the same, expect a trap.
-            #if they played rock then rock, they want you to play
-            #paper, counter by playing rock when they throw scissors
-            #expecting your paper. 
-               return earlierPlays[-1]
+    # given a predicted opponents move, 
+    # return the counter play.
+    def counter(self,opp_move):
+        if opp_move == 0:	#opponent plays rock
+            return 1		#play paper
+        elif opp_move ==1:	#opponent plays paper	
+            return 2		#play scissors
         else:
-            #probability opponent uses rock next
-            probRock = earlierPlays.count("rock")/len(earlierPlays)
-            #probability opponet uses scissors next
-            probScissors = earlierPlays.count("scissors")/len(earlierPlays)
-            #probability opponent uses paper next
-            probPaper = earlierPlays.count("paper")/len(earlierPlays)
+            return 0		#opponent plasy scissors, play rock.
+def main():
+    #setPlayer(RPSPlayer())
+    #ip address
+    #host_ip = "abc123"
+    #register(host_ip)
+    play()
+main()
 
-            nextPlay = max(probRock,probScissors,probPaper)
 
-            if nextPlay == probRock:
-                return "rock"
-            if nextPlay == probScissors:
-                return "scissors"
-            if nextPlay == probPaper:
-                return "paper"
-            
-            
-            
-        
-        
-    
-        
-        
