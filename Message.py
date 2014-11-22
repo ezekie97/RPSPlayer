@@ -21,20 +21,20 @@ class Message(object):
 
     @staticmethod
     def get_match_start_message(players):
-        return Message.createmessage(Message.Match_Start, players)
+        return Message.create_message(Message.Match_Start, players)
 
     @staticmethod
     def get_match_end_message(players, result):
-        return Message.createmessage (Message.Match_End, players, result)
+        return Message.create_message (Message.Match_End, players, result)
 
     @staticmethod
     def get_round_start_message(players):
-        return Message.createmessage(Message.Round_Start, players)
+        return Message.create_message(Message.Round_Start, players)
 
     @staticmethod
     def get_round_end_message(players, moves, result):
         info = (moves, result)
-        return Message.createmessage(Message.Round_End, players, info)
+        return Message.create_message(Message.Round_End, players, info)
 
     def __init__(self, msgtype):
         self.msgtype = msgtype
