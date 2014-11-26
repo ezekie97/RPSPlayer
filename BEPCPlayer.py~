@@ -87,6 +87,8 @@ class BEPCPlayer(Player.Player):
         :param: winning_player: The player number of who won the round
         """
         #first, check if we are the winning player
+        print("round moves",round_moves)
+        print("opp_move",self.get_opp_number()-1,"move is ",round_moves[self.get_opp_number()-1])
         if winning_player == self.get_player_number():
             # WE WON!
             # Add our winning move to the list
@@ -115,10 +117,12 @@ class BEPCPlayer(Player.Player):
         """
         if players[0] == self:
             # We are player 1
+            print("Player1")
             self.set_player_number(1)
             self.set_opp_number(2)
             return True
         elif players[1] == self:
+            print("Player2")
             # We are player 2
             self.set_player_number(2)
             self.set_opp_number(1)
@@ -134,7 +138,10 @@ class BEPCPlayer(Player.Player):
         match. 0 - 3 depending on the predicted counter.
         """
         # first move "scissors" (2)
+        print("oppmoves",self.get_opp_moves())
+        print("pastmoves",self.get_past_moves())
         if len(self.get_past_moves()) == 0:
+            print("First move")
             counter_play = 2
             #print(counter_play)
             return counter_play
