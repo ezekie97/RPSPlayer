@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 __author__ = "William Ezekiel & Paul Council"
-__date__ = "30 November 2014"
-__version__ = "1.0.3"
+__date__ = "21 November 2014"
+__version__ = "1.0.2"
+#Note: I did not include the name functionality that is currently online.
 
 #imports
 import Player
@@ -9,6 +10,7 @@ import Player
 """
 An RPS game Player
 """
+
 
 class BEPCPlayer(Player.Player):
     """
@@ -218,7 +220,7 @@ class BEPCPlayer(Player.Player):
         """Returns this player's name
         :return: The name of this player
         """
-        return "Bill and Paul"
+        return self.name
 
     def get_opp_number(self):
         """Returns the opponent's number
